@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="pr006">
+	<typeAlias  alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
+	<typeAlias  alias="ProjectVO" type="prms.vo.ProjectVO"/>
+
+	<!-- test -->
+	<select id="ul_selectAll" resultClass="egovMap">
+		<![CDATA[
+			SELECT * FROM PR010			
+		]]>
+	</select>
+	
+	<resultMap id="Project" class="prms.vo.ProjectVO">
+		<result property="projNo" column="PROJ_NO" columnIndex="1"/>
+		<result property="projName" column="PROJ_NAME" columnIndex="2"/>
+		<result property="projTotal" column="PROJ_TOTAL" columnIndex="3"/>
+		<result property="projState" column="PROJ_STATE" columnIndex="4"/>
+	</resultMap>
+
+	<select id="projectDetail" parameterClass="ProjectVO" resultMap="Project">
+		<![CDATA[ 
+			SELECT 
+			PROJ_NO, PROJ_NAME, NVL(PROJ_TOTAL,0) as PROJ_TOTAL, PROJ_STATE
+			FROM 
+			PR006
+			WHERE
+			PROJ_NO = 100001
+		]]>
+	</select>
+</sqlMap>
